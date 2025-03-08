@@ -1,13 +1,27 @@
-import React from "react";
+"use client";
+
+import { usePathname } from "next/navigation";
 
 const NavBar = () => {
+  const pathname = usePathname();
+
+  const navItems = [
+    { name: "Home", link: "/" },
+    { name: "About", link: "/about" },
+    { name: "Services", link: "/services" },
+    { name: "Pricing", link: "/pricing" },
+    { name: "Cars", link: "/cars" },
+    { name: "Blog", link: "/blog" },
+    { name: "Contact", link: "/contact" },
+  ];
+
   return (
     <nav
       className="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
       id="ftco-navbar"
     >
       <div className="container">
-        <a className="navbar-brand" href="index.html">
+        <a className="navbar-brand" href="/">
           Let's Rent A <span>Car</span>
         </a>
         <button
@@ -24,41 +38,16 @@ const NavBar = () => {
 
         <div className="collapse navbar-collapse" id="ftco-nav">
           <ul className="navbar-nav ml-auto">
-            <li className="nav-item active">
-              <a href="index.html" className="nav-link">
-                Home
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="about.html" className="nav-link">
-                About
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="services.html" className="nav-link">
-                Services
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="pricing.html" className="nav-link">
-                Pricing
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="car.html" className="nav-link">
-                Cars
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="blog.html" className="nav-link">
-                Blog
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="contact.html" className="nav-link">
-                Contact
-              </a>
-            </li>
+            {navItems.map((item, index) => (
+              <li
+                className={`nav-item ${pathname === item.link ? "active" : ""}`}
+                key={index}
+              >
+                <a className="nav-link" href={item.link}>
+                  {item.name}
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
